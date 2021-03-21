@@ -2,7 +2,12 @@ import pyautogui
 import time
 from random import choice
 
-pyautogui.moveTo(603, 1014)
+time.sleep(3)
+width, height = pyautogui.size()
+# posx, posy = 0.3140625 * width, 0.95 * height
+loc = pyautogui.locateOnScreen('ss.png', grayscale=True)
+posx, posy = pyautogui.center(loc)
+pyautogui.moveTo(posx, posy)
 pyautogui.click()
 s1 = '''
 In William Shakespeare's Hamlet, "to be, or not to be, that is the question." In the 21st century, "to code, or not to code, that is the challenge.
