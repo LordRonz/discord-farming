@@ -27,7 +27,7 @@ def main():
         chosenOne = s3
 
         delay = max(62, 62 if len(sys.argv) < 3 else int(sys.argv[2]))
-        print(delay)
+
         while True:
             s = choice(s3)
             pyautogui.write(s)
