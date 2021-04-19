@@ -5,6 +5,8 @@ def main():
         from random import choice
         import sys
 
+        pyautogui.FAILSAFE = True
+
         with open('./shakespeare.txt') as f:
             s1 = f.read().splitlines()
 
@@ -26,11 +28,19 @@ def main():
 
         chosenOne = s3
 
-        delay = max(62, 62 if len(sys.argv) < 3 else int(sys.argv[2]))
-
+        delay = max(60, 60 if len(sys.argv) < 3 else int(sys.argv[2]))
+        ## PLACE MOUSE INSIDE THE TEXTBOX
         while True:
             s = choice(chosenOne)
             pyautogui.write(s)
+            pyautogui.press('enter')
+            time.sleep(2)
+            pyautogui.click()
+            pyautogui.press('up')
+            pyautogui.hotkey('ctrl', 'a')
+            pyautogui.press('backspace')
+            pyautogui.press('enter')
+            time.sleep(1)
             pyautogui.press('enter')
             time.sleep(delay)
 
