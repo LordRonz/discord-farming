@@ -1,23 +1,41 @@
-def main():
+import asyncio
+
+async def main():
     try:
         import pyautogui
         import time
         from random import choice
-        import sys
+        import nhentaigen.nhentai_code_generator as nh
+        import argparse
 
         pyautogui.FAILSAFE = True
 
-        with open('./shakespeare.txt') as f:
-            s1 = f.read().splitlines()
+        parser = argparse.ArgumentParser(description='Sucking MEE6\'s cock')
+        parser.add_argument('-i', default=3.0, type=float, help='initial delay(sec)', )
+        parser.add_argument('-d', default=62.0, type=float, help='delay between messages(sec)')
+        parser.add_argument('-l', action='store_true', help='locate textbox')
+        parser.add_argument('-r', action='store_true', help='delete message after sending it')
+        parser.add_argument('-s', default=None, help='test file source(shakespeare, potter, or uzumaki)')
 
-        with open('./potterspells.txt') as f:
-            s2 = f.read().splitlines()
+        flags = vars(parser.parse_args())
 
-        with open('./uzumakibayu.txt') as f:
-            s3 = f.read().splitlines()
+        txt = None
+        if flags['s'] == 'shakespeare':
+            with open('./shakespeare.txt') as f:
+                txt = f.read().splitlines()
+        
+        elif flags['s'] == 'potter':
+            with open('./potterspells.txt') as f:
+                txt = f.read().splitlines()
 
-        time.sleep(3)
-        if len(sys.argv) < 2 or (len(sys.argv) > 1 and (sys.argv[1] == '1' or sys.argv[1].lower() == 'true')):
+        elif flags['s'] == 'uzumaki':
+            with open('./uzumakibayu.txt') as f:
+                txt = f.read().splitlines()
+
+        # Initial delay
+        time.sleep(flags['i'])
+
+        if flags['l']:
             width, height = pyautogui.size()
             # posx, posy = 0.3140625 * width, 0.95 * height
             loc = pyautogui.locateOnScreen('ss.png', grayscale=True)
@@ -26,26 +44,52 @@ def main():
                 pyautogui.moveTo(posx, posy)
                 pyautogui.click()
 
-        chosenOne = s3
-
-        delay = max(60, 60 if len(sys.argv) < 3 else int(sys.argv[2]))
+        delay = max(60, flags['d'])
         ## PLACE MOUSE INSIDE THE TEXTBOX
-        while True:
-            s = choice(chosenOne)
-            pyautogui.write(s)
-            pyautogui.press('enter')
-            time.sleep(2)
-            pyautogui.click()
-            pyautogui.press('up')
-            pyautogui.hotkey('ctrl', 'a')
-            pyautogui.press('backspace')
-            pyautogui.press('enter')
-            time.sleep(1)
-            pyautogui.press('enter')
-            time.sleep(delay)
+
+        async def nh_mode():
+            nhcode = nh.valid_url()
+            while True:
+                s = await nhcode
+                pyautogui.write(s)
+                pyautogui.press('enter')
+                time.sleep(2)
+                if flags['r']:
+                    pyautogui.press('a')
+                    pyautogui.press('backspace')
+                    pyautogui.press('up')
+                    pyautogui.hotkey('ctrl', 'a')
+                    pyautogui.press('backspace')
+                    pyautogui.press('enter')
+                    time.sleep(1)
+                    pyautogui.press('enter')
+                nhcode = nh.valid_url()
+                time.sleep(delay)
+
+        def txt_mode():
+            chosenOne = txt
+            while True:
+                s = choice(txt)
+                pyautogui.write(s)
+                pyautogui.press('enter')
+                time.sleep(2)
+                if flags['r']:
+                    pyautogui.press('a')
+                    pyautogui.press('backspace')
+                    pyautogui.press('up')
+                    pyautogui.hotkey('ctrl', 'a')
+                    pyautogui.press('backspace')
+                    pyautogui.press('enter')
+                    time.sleep(1)
+                    pyautogui.press('enter')
+                time.sleep(delay)
+        if txt:
+            txt_mode()
+        else:
+            await nh_mode()
 
     except Exception as e:
         print(e)
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())
