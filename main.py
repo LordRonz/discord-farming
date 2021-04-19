@@ -7,7 +7,7 @@ def main():
 
         with open('./shakespeare.txt') as f:
             s1 = f.read().splitlines()
-    
+
         with open('./potterspells.txt') as f:
             s2 = f.read().splitlines()
 
@@ -29,7 +29,7 @@ def main():
         delay = max(62, 62 if len(sys.argv) < 3 else int(sys.argv[2]))
 
         while True:
-            s = choice(s3)
+            s = choice(chosenOne)
             pyautogui.write(s)
             pyautogui.press('enter')
             time.sleep(delay)
