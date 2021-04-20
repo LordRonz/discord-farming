@@ -9,6 +9,7 @@ async def main():
         import argparse
 
         pyautogui.FAILSAFE = True
+        pyautogui.PAUSE = 0.3
 
         parser = argparse.ArgumentParser(description='Sucking MEE6\'s cock')
         parser.add_argument('-i', default=3.0, type=float, help='initial delay(sec)', )
@@ -53,7 +54,7 @@ async def main():
                 s = await nhcode
                 pyautogui.write(s)
                 pyautogui.press('enter')
-                time.sleep(2)
+                time.sleep(1)
                 if flags['r']:
                     pyautogui.press('a')
                     pyautogui.press('backspace')
@@ -72,7 +73,7 @@ async def main():
                 s = choice(txt)
                 pyautogui.write(s)
                 pyautogui.press('enter')
-                time.sleep(2)
+                time.sleep(1)
                 if flags['r']:
                     pyautogui.press('a')
                     pyautogui.press('backspace')
