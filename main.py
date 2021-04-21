@@ -13,7 +13,7 @@ async def main():
 
         parser = argparse.ArgumentParser(description='Sucking MEE6\'s cock')
         parser.add_argument('-i', default=3.0, type=float, help='initial delay(sec)', )
-        parser.add_argument('-d', default=62.0, type=float, help='delay between messages(sec)')
+        parser.add_argument('-d', default=60.0, type=float, help='delay between messages(sec)')
         parser.add_argument('-l', action='store_true', help='locate textbox')
         parser.add_argument('-r', action='store_true', help='delete message after sending it')
         parser.add_argument('-s', default=None, help='test file source(shakespeare, potter, or uzumaki)')
@@ -54,7 +54,7 @@ async def main():
                 s = await nhcode
                 pyautogui.write(s)
                 pyautogui.press('enter')
-                time.sleep(1)
+                await asyncio.sleep(1)
                 if flags['r']:
                     pyautogui.press('a')
                     pyautogui.press('backspace')
@@ -62,10 +62,11 @@ async def main():
                     pyautogui.hotkey('ctrl', 'a')
                     pyautogui.press('backspace')
                     pyautogui.press('enter')
-                    time.sleep(1)
+                    await asyncio.sleep(1)
                     pyautogui.press('enter')
-                nhcode = nh.valid_url()
-                time.sleep(delay)
+                nhcode = asyncio.create_task(nh.valid_url())
+                schleep = asyncio.create_task(asyncio.sleep(delay))
+                await schleep
 
         def txt_mode():
             chosenOne = txt
