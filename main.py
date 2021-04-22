@@ -45,7 +45,7 @@ async def main():
                 pyautogui.moveTo(posx, posy)
                 pyautogui.click()
 
-        delay = max(60, flags['d'])
+        delay = max(50.69, flags['d'])
         ## PLACE MOUSE INSIDE THE TEXTBOX
 
         async def nh_mode():
