@@ -4,20 +4,14 @@ from random import randint
 import requests as req
 import re
 
-def read_db():
-    with open('latest.txt', 'rb') as f:
-        res = int(f.readline())
-    return res
+latest = 1
 
-def update_db():
+def fetch_latest():
+    global latest
     pattern = r'New Uploads[\w\W]+<a href="/g/[\d]+'
     resp = req.get('https://nhentai.net')
-    res = re.search(pattern, resp.text).group().split('/')[3]
-    with open('latest.txt', 'w') as f:
-        f.write(res)
-
-update_db()
-latest = read_db()
+    latest = int(re.search(pattern, resp.text).group().split('/')[3])
+    return resp.ok
 
 def gen_code():
     return randint(1, latest)
