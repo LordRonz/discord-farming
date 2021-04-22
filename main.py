@@ -36,6 +36,11 @@ async def main():
         # Initial delay
         time.sleep(flags['i'])
 
+        if not txt:
+            if not nh.fetch_latest():
+                print('Error connecting to nhentai!')
+                return
+
         if flags['l']:
             width, height = pyautogui.size()
             # posx, posy = 0.3140625 * width, 0.95 * height
