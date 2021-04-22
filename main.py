@@ -46,7 +46,7 @@ async def main():
                 pyautogui.click()
 
         delay = max(50.69, flags['d'])
-        ## PLACE MOUSE INSIDE THE TEXTBOX
+        ## PLACE CURSOR IN THE TEXT BOX
 
         async def nh_mode():
             nhcode = nh.valid_url()
