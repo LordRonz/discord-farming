@@ -17,7 +17,6 @@ def fetch_latest():
         print(e)
         return False
 
-
 def gen_code():
     return randint(1, latest)
 
@@ -28,7 +27,7 @@ async def valid_url(code_only=True):
         while not valid:
             url =  f'https://nhentai.net/g/{gen_code()}'
             r = req.get(url)
-            valid = r.status_code != 404
+            valid = r.ok
     except req.exceptions.RequestException as e:
         print(e)
         url = f'https://nhentai.net/g/{gen_code()}'
