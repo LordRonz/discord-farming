@@ -7,6 +7,7 @@ async def main():
         from random import choice
         import nhentaigen.nhentai_code_generator as nh
         import argparse
+        from random import choice
 
         pyautogui.FAILSAFE = True
         pyautogui.PAUSE = 0.3
@@ -39,7 +40,10 @@ async def main():
         if not txt:
             if not nh.fetch_latest():
                 print('Error connecting to nhentai!')
-                return
+                print('TXT mode')
+                path = choice(('./uzumakibayu.txt', './shakespeare.txt', './potterspells.txt'))
+                with open(path) as f:
+                    txt = f.read().splitlines()
 
         if flags['l']:
             width, height = pyautogui.size()
