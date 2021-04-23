@@ -7,7 +7,6 @@ async def main():
         from random import choice
         import nhentaigen.nhentai_code_generator as nh
         import argparse
-        from random import choice
 
         pyautogui.FAILSAFE = True
         pyautogui.PAUSE = 0.3
