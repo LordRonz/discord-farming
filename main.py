@@ -92,7 +92,6 @@ async def main():
                 await schleep
 
         def txt_mode():
-            chosenOne = txt
             while True:
                 s = choice(txt)
                 pyautogui.write(s)
