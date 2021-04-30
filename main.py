@@ -7,9 +7,12 @@ async def main():
         from random import choice
         import nhentaigen.nhentai_code_generator as nh
         import argparse
+        from pyperclip import copy as cpy
 
         pyautogui.FAILSAFE = True
         pyautogui.PAUSE = 0.3
+
+        NHENTAI, TEXT, COPYPASTA = 0, 1, 2
 
         parser = argparse.ArgumentParser(description='Sucking MEE6\'s cock')
         parser.add_argument('-i', default=3.0, type=float, help='initial delay(sec)', )
@@ -20,7 +23,9 @@ async def main():
 
         flags = vars(parser.parse_args())
 
+        copypasta = None
         txt = None
+
         if flags['s'] == 'shakespeare':
             with open('./shakespeare.txt') as f:
                 txt = f.read().splitlines()
@@ -33,10 +38,20 @@ async def main():
             with open('./uzumakibayu.txt') as f:
                 txt = f.read().splitlines()
 
+        elif flags['s'] == 'amogus':
+            with open('./amogus.txt') as f:
+                copypasta = f.read()
+
+        state = NHENTAI
+        if txt:
+            state = TEXT
+        elif copypasta:
+            state = COPYPASTA
+
         # Initial delay
         time.sleep(flags['i'])
 
-        if not txt:
+        if state == NHENTAI:
             if not nh.fetch_latest():
                 print('Error connecting to nhentai!')
                 print('TXT mode')
@@ -93,9 +108,29 @@ async def main():
                     time.sleep(1)
                     pyautogui.press('enter')
                 time.sleep(delay)
-        if txt:
+
+        def copypasta_mode():
+            while True:
+                cpy(copypasta)
+                pyautogui.hotkey('ctrl', 'v')
+                pyautogui.press('enter')
+                time.sleep(1)
+                if flags['r']:
+                    pyautogui.press('a')
+                    pyautogui.press('backspace')
+                    pyautogui.press('up')
+                    pyautogui.hotkey('ctrl', 'a')
+                    pyautogui.press('backspace')
+                    pyautogui.press('enter')
+                    time.sleep(1)
+                    pyautogui.press('enter')
+                time.sleep(delay)
+
+        if state == TEXT:
             txt_mode()
-        else:
+        elif state == COPYPASTA:
+            copypasta_mode()
+        elif state == NHENTAI:
             await nh_mode()
 
     except Exception as e:
