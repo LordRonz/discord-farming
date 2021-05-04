@@ -75,7 +75,8 @@ async def main():
             nhcode = nh.valid_url()
             while True:
                 s = await nhcode
-                pyautogui.write(s)
+                cpy(s)
+                pyautogui.hotkey('ctrl', 'v')
                 pyautogui.press('enter')
                 await asyncio.sleep(1)
                 if flags['r']:
@@ -94,7 +95,8 @@ async def main():
         def txt_mode():
             while True:
                 s = choice(txt)
-                pyautogui.write(s)
+                cpy(s)
+                pyautogui.hotkey('ctrl', 'v')
                 pyautogui.press('enter')
                 time.sleep(1)
                 if flags['r']:
