@@ -42,6 +42,18 @@ async def main():
             with open('./amogus.txt') as f:
                 copypasta = f.read()
 
+        elif flags['s'] == 'amogus1':
+            with open('./amogus1.txt') as f:
+                copypasta = f.read()
+
+        elif flags['s'] == 'amogus2':
+            with open('./amogus2.txt') as f:
+                copypasta = f.read()
+        
+        elif flags['s'] == 'amogus3':
+            with open('./amogus3.txt') as f:
+                copypasta = f.read()
+
         state = NHENTAI
         if txt:
             state = TEXT
