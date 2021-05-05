@@ -10,7 +10,7 @@ async def main():
         from pyperclip import copy as cpy
 
         pyautogui.FAILSAFE = True
-        pyautogui.PAUSE = 0.3
+        pyautogui.PAUSE = 0.5
 
         NHENTAI, TEXT, COPYPASTA = 0, 1, 2
 
