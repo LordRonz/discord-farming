@@ -16,6 +16,7 @@ async def main():
         NHENTAI, TEXT, COPYPASTA = 0, 1, 2
 
         flags = get_args()
+        write_mode = flags['w']
 
         txt = get_txt(flags['s'])
         copypasta = None
@@ -55,9 +56,12 @@ async def main():
             nhcode = nh.valid_url()
             while True:
                 s = await nhcode
-                cpy(s)
-                await asyncio.sleep(0.69)
-                pyautogui.hotkey('ctrl', 'v')
+                if write_mode:
+                    pyautogui.write(s)
+                else:
+                    cpy(s)
+                    await asyncio.sleep(0.69)
+                    pyautogui.hotkey('ctrl', 'v')
                 pyautogui.press('enter')
                 await asyncio.sleep(1)
                 if flags['r']:
@@ -76,9 +80,12 @@ async def main():
         def txt_mode():
             while True:
                 s = choice(txt)
-                cpy(s)
-                time.sleep(0.69)
-                pyautogui.hotkey('ctrl', 'v')
+                if write_mode:
+                    pyautogui.write(s)
+                else:
+                    cpy(s)
+                    time.sleep(0.69)
+                    pyautogui.hotkey('ctrl', 'v')
                 pyautogui.press('enter')
                 time.sleep(1)
                 if flags['r']:
