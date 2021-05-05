@@ -11,7 +11,7 @@ async def main():
         from utils.read_txt import get_txt, get_copypasta
 
         pyautogui.FAILSAFE = True
-        pyautogui.PAUSE = 0.3
+        pyautogui.PAUSE = 0.69
 
         NHENTAI, TEXT, COPYPASTA = 0, 1, 2
 
@@ -57,18 +57,18 @@ async def main():
             while True:
                 s = await nhcode
                 if write_mode:
-                    pyautogui.write(s)
+                    pyautogui.write(s, interval=0.1)
                 else:
                     cpy(s)
                     await asyncio.sleep(0.69)
-                    pyautogui.hotkey('ctrl', 'v')
+                    pyautogui.hotkey('ctrl', 'v', interval=0.15)
                 pyautogui.press('enter')
                 await asyncio.sleep(1)
                 if flags['r']:
                     pyautogui.press('a')
                     pyautogui.press('backspace')
                     pyautogui.press('up')
-                    pyautogui.hotkey('ctrl', 'a')
+                    pyautogui.hotkey('ctrl', 'a', interval=0.15)
                     pyautogui.press('backspace')
                     pyautogui.press('enter')
                     await asyncio.sleep(1)
@@ -81,18 +81,18 @@ async def main():
             while True:
                 s = choice(txt)
                 if write_mode:
-                    pyautogui.write(s)
+                    pyautogui.write(s, interval=0.1)
                 else:
                     cpy(s)
                     time.sleep(0.69)
-                    pyautogui.hotkey('ctrl', 'v')
+                    pyautogui.hotkey('ctrl', 'v', interval=0.15)
                 pyautogui.press('enter')
                 time.sleep(1)
                 if flags['r']:
                     pyautogui.press('a')
                     pyautogui.press('backspace')
                     pyautogui.press('up')
-                    pyautogui.hotkey('ctrl', 'a')
+                    pyautogui.hotkey('ctrl', 'a', interval=0.15)
                     pyautogui.press('backspace')
                     pyautogui.press('enter')
                     time.sleep(1)
@@ -103,14 +103,14 @@ async def main():
             while True:
                 cpy(copypasta)
                 time.sleep(0.69)
-                pyautogui.hotkey('ctrl', 'v')
+                pyautogui.hotkey('ctrl', 'v', interval=0.15)
                 pyautogui.press('enter')
                 time.sleep(1)
                 if flags['r']:
                     pyautogui.press('a')
                     pyautogui.press('backspace')
                     pyautogui.press('up')
-                    pyautogui.hotkey('ctrl', 'a')
+                    pyautogui.hotkey('ctrl', 'a', interval=0.15)
                     pyautogui.press('backspace')
                     pyautogui.press('enter')
                     time.sleep(1)
