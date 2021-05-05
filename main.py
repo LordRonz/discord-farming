@@ -6,53 +6,21 @@ async def main():
         import time
         from random import choice
         import nhentaigen.nhentai_code_generator as nh
-        import argparse
         from pyperclip import copy as cpy
+        from utils.argparser import get_args
+        from utils.read_txt import get_txt, get_copypasta
 
         pyautogui.FAILSAFE = True
         pyautogui.PAUSE = 0.3
 
         NHENTAI, TEXT, COPYPASTA = 0, 1, 2
 
-        parser = argparse.ArgumentParser(description='Sucking MEE6\'s cock')
-        parser.add_argument('-i', default=3.0, type=float, help='initial delay(sec)', )
-        parser.add_argument('-d', default=60.0, type=float, help='delay between messages(sec)')
-        parser.add_argument('-l', action='store_true', help='locate textbox')
-        parser.add_argument('-r', action='store_true', help='delete message after sending it')
-        parser.add_argument('-s', default=None, help='test file source(shakespeare, potter, or uzumaki)')
+        flags = get_args()
 
-        flags = vars(parser.parse_args())
-
+        txt = get_txt(flags['s'])
         copypasta = None
-        txt = None
-
-        if flags['s'] == 'shakespeare':
-            with open('./shakespeare.txt') as f:
-                txt = f.read().splitlines()
-        
-        elif flags['s'] == 'potter':
-            with open('./potterspells.txt') as f:
-                txt = f.read().splitlines()
-
-        elif flags['s'] == 'uzumaki':
-            with open('./uzumakibayu.txt') as f:
-                txt = f.read().splitlines()
-
-        elif flags['s'] == 'amogus':
-            with open('./amogus.txt') as f:
-                copypasta = f.read()
-
-        elif flags['s'] == 'amogus1':
-            with open('./amogus1.txt') as f:
-                copypasta = f.read()
-
-        elif flags['s'] == 'amogus2':
-            with open('./amogus2.txt') as f:
-                copypasta = f.read()
-        
-        elif flags['s'] == 'amogus3':
-            with open('./amogus3.txt') as f:
-                copypasta = f.read()
+        if not txt:
+            copypasta = get_copypasta(flags['s'])
 
         state = NHENTAI
         if txt:
