@@ -88,8 +88,8 @@ async def main():
             while True:
                 s = await nhcode
                 cpy(s)
-                pyautogui.hotkey('ctrl', 'v')
                 await asyncio.sleep(0.69)
+                pyautogui.hotkey('ctrl', 'v')
                 pyautogui.press('enter')
                 await asyncio.sleep(1)
                 if flags['r']:
@@ -109,8 +109,8 @@ async def main():
             while True:
                 s = choice(txt)
                 cpy(s)
-                pyautogui.hotkey('ctrl', 'v')
                 time.sleep(0.69)
+                pyautogui.hotkey('ctrl', 'v')
                 pyautogui.press('enter')
                 time.sleep(1)
                 if flags['r']:
@@ -127,8 +127,8 @@ async def main():
         def copypasta_mode():
             while True:
                 cpy(copypasta)
-                pyautogui.hotkey('ctrl', 'v')
                 time.sleep(0.69)
+                pyautogui.hotkey('ctrl', 'v')
                 pyautogui.press('enter')
                 time.sleep(1)
                 if flags['r']:
