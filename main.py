@@ -10,7 +10,7 @@ async def main():
         from pyperclip import copy as cpy
 
         pyautogui.FAILSAFE = True
-        pyautogui.PAUSE = 0.5
+        pyautogui.PAUSE = 0.3
 
         NHENTAI, TEXT, COPYPASTA = 0, 1, 2
 
@@ -89,6 +89,7 @@ async def main():
                 s = await nhcode
                 cpy(s)
                 pyautogui.hotkey('ctrl', 'v')
+                await asyncio.sleep(0.69)
                 pyautogui.press('enter')
                 await asyncio.sleep(1)
                 if flags['r']:
@@ -109,6 +110,7 @@ async def main():
                 s = choice(txt)
                 cpy(s)
                 pyautogui.hotkey('ctrl', 'v')
+                time.sleep(0.69)
                 pyautogui.press('enter')
                 time.sleep(1)
                 if flags['r']:
@@ -126,6 +128,7 @@ async def main():
             while True:
                 cpy(copypasta)
                 pyautogui.hotkey('ctrl', 'v')
+                time.sleep(0.69)
                 pyautogui.press('enter')
                 time.sleep(1)
                 if flags['r']:
